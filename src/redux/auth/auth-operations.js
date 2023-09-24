@@ -11,26 +11,29 @@ const token = {
   },
 };
 
-const registration = createAsyncThunk('auth/register', async (info, thunkAPI) => {
-    console.log(info)
-  try {
-    const { data } = await axios.post('/users/signup', info);
+const registration = createAsyncThunk(
+  'auth/register',
+  async (info, thunkAPI) => {
+    try {
+      const { data } = await axios.post('/users/signup', info);
       token.set(data.token);
-    return data;
-  } catch (e) {
-    alert('Please try again with correct velues')
-    return thunkAPI.rejectWithValue(e.message);
+      return data;
+    } catch (e) {
+      alert('Please try again with correct velues');
+      return thunkAPI.rejectWithValue(e.message);
+    }
   }
-});
+);
 
 const loggining = createAsyncThunk('auth/login', async (info, thunkAPI) => {
-  console.log(info)
+  console.log(info);
   try {
     const { data } = await axios.post('/users/login', info);
     token.set(data.token);
+    console.log(data);
     return data;
   } catch (e) {
-    alert('Please try again with correct velues')
+    alert('Please try again with correct velues');
     return thunkAPI.rejectWithValue(e.message);
   }
 });
@@ -53,14 +56,14 @@ const fetchCurrentUser = createAsyncThunk(
     if (persistedToken === null) return thunkAPI.rejectWithValue();
 
     token.set(persistedToken);
-      
+
     try {
       const { data } = await axios.get('/users/current');
       return data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
-  },
+  }
 );
 
 const operations = {

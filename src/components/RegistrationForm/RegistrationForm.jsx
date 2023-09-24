@@ -67,7 +67,7 @@ export const RegistrationForm = () => {
           <StyledLabel htmlFor={passUniqueId}>Password</StyledLabel>
           <Field
             id={passUniqueId}
-            type="text"
+            type="password"
             name="password"
             title="Paste youe password correctly"
           />

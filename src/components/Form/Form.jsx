@@ -11,6 +11,7 @@ import {
 } from './form.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from '../../redux/contacts/contacts-operations';
+import { getContacts } from '../../redux/contacts/contacts-selectors';
 
 const SignupSchema = Yup.object().shape({
   name: Yup.string()
@@ -29,7 +30,7 @@ export const ContactsForm = () => {
   const nameUniqueId = nanoid(20);
   const telUniqueId = nanoid(25);
 
-  const contacts = useSelector(state => state.contacts.list);
+  const contacts = useSelector(getContacts);
   const dispatch = useDispatch();
 
   const addNewContact = e => {

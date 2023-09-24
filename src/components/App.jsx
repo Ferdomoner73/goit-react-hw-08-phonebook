@@ -5,6 +5,8 @@ import { Home } from '../pages/Home/Home';
 import { Login } from 'pages/Login/Login';
 import { Registration } from 'pages/Registration/Registration';
 import { Contacts } from './Contacts/Contacts';
+import { RestrictedRoute } from './RestrictedRoute';
+import { PrivateRoute } from './PrivateRoute';
 
 export const App = () => {
   return (
@@ -12,9 +14,25 @@ export const App = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="contacts" element={<Contacts />} />
-          <Route path="login" element={<Login />}></Route>
-          <Route path="registration" element={<Registration />}></Route>
+          <Route
+            path="contacts"
+            element={<PrivateRoute redirectTo="/" component={<Contacts />} />}
+          />
+          <Route
+            path="login"
+            element={
+              <RestrictedRoute redirectTo="/contacts" component={<Login />} />
+            }
+          ></Route>
+          <Route
+            path="registration"
+            element={
+              <RestrictedRoute
+                redirectTo="/contacts"
+                component={<Registration />}
+              />
+            }
+          ></Route>
         </Route>
       </Routes>
     </>

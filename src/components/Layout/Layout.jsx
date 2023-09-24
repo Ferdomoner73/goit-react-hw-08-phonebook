@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import {
   NavLinkItem,
   NavLinkList,
@@ -7,13 +7,21 @@ import {
   Header,
   Container,
 } from './layout.styled';
-import { Suspense } from 'react';
-import { useSelector } from 'react-redux';
+import { Suspense, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { getIsLoggedIn } from '../../redux/auth/auth-selectors';
 import { UserMenu } from '../UserMenu/UserMenu';
+import operations from '../../redux/auth/auth-operations';
 
 export const Layout = () => {
   const isLoggedIn = useSelector(getIsLoggedIn);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    dispatch(operations.fetchCurrentUser());
+  }, [dispatch, navigate, isLoggedIn, location.pathname]);
 
   return (
     <>
@@ -22,9 +30,11 @@ export const Layout = () => {
           <NavLinkItem>
             <Link to="/">Home</Link>
           </NavLinkItem>
-          <NavLinkItem>
-            <Link to="/contacts">Contacts</Link>
-          </NavLinkItem>
+          {isLoggedIn && (
+            <NavLinkItem>
+              <Link to="/contacts">Contacts</Link>
+            </NavLinkItem>
+          )}
         </NavLinkList>
         {isLoggedIn ? (
           <UserMenu />

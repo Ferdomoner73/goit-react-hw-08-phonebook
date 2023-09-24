@@ -53,7 +53,7 @@ export const LoginForm = () => {
           <StyledLabel htmlFor={passUniqueId}>Password</StyledLabel>
           <Field
             id={passUniqueId}
-            type="tel"
+            type="password"
             name="password"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           />
