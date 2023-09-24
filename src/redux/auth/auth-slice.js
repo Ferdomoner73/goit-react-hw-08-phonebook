@@ -10,25 +10,26 @@ const initialState = {
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
-  extraReducers: {
-    [authOperations.registration.fulfilled](state, action) {
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(authOperations.registration.fulfilled, (state, action) => {
       state.user = action.payload.user;
       state.token = action.payload.token;
       state.isLoggedIn = true;
-    },
-    [authOperations.loggining.fulfilled](state, action) {
+    });
+    builder.addCase(authOperations.loggining.fulfilled, (state, action) => {
       state.user = action.payload.user;
       state.token = action.payload.token;
       state.isLoggedIn = true;
-    },
-    [authOperations.logOut.fulfilled](state, action) {
-      state.user = { name: null, email: null };
-      state.token = null;
-      state.isLoggedIn = false;
-    },
-    [authOperations.fetchCurrentUser.fulfilled](state, action) {
+    });
+      builder.addCase(authOperations.logOut.fulfilled, (state, action) => {
+        state.user = { name: null, email: null };
+        state.token = null;
+        state.isLoggedIn = false;
+      });
+    builder.addCase(authOperations.fetchCurrentUser.fulfilled, (state, action) => {
       state.user = action.payload;
       state.isLoggedIn = true;
-    },
+    });
   },
 });
