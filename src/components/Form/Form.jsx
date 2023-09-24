@@ -1,10 +1,16 @@
 import { nanoid } from 'nanoid';
 import React from 'react';
-import { Formik, Form, ErrorMessage, Field } from 'formik';
+import { Formik, ErrorMessage, Field } from 'formik';
 import * as Yup from 'yup';
-import { FormSection, FormTitle } from './form.styled';
+import {
+  FormSection,
+  FormTitle,
+  StyledForm,
+  SubmitButton,
+  StyledLabel,
+} from './form.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { add } from '../../redux/contacts/contactsSlice';
+import { addContact } from '../../redux/contacts/contacts-operations';
 
 const SignupSchema = Yup.object().shape({
   name: Yup.string()
@@ -37,7 +43,7 @@ export const ContactsForm = () => {
       }
     }
 
-    dispatch(add(e));
+    dispatch(addContact(e));
   };
 
   return (
@@ -54,22 +60,16 @@ export const ContactsForm = () => {
           actions.resetForm();
         }}
       >
-        <Form>
-          <label htmlFor={nameUniqueId}>Name</label>
-          <br />
-          <br />
+        <StyledForm>
+          <StyledLabel htmlFor={nameUniqueId}>Name</StyledLabel>
           <Field
             id={nameUniqueId}
             type="text"
             name="name"
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           />
-          <br />
-          <br />
           <ErrorMessage name="name" component="div" />
-          <label htmlFor={telUniqueId}>Number</label>
-          <br />
-          <br />
+          <StyledLabel htmlFor={telUniqueId}>Number</StyledLabel>
           <Field
             id={telUniqueId}
             type="tel"
@@ -77,10 +77,8 @@ export const ContactsForm = () => {
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           />
           <ErrorMessage name="number" />
-          <br />
-          <br />
-          <button type="submit">Add contact</button>
-        </Form>
+          <SubmitButton type="submit">Add contact</SubmitButton>
+        </StyledForm>
       </Formik>
     </FormSection>
   );

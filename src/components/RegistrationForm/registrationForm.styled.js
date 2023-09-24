@@ -9,12 +9,6 @@ export const FormSection = styled.div`
     gap: 10px;
 `
 
-export const FormTitle = styled.h2`
-    font-weight: 400;
-    padding: 10px 0;
-    color: grey;
-`
-
 export const StyledLabel = styled.label`
     color: grey;
 `

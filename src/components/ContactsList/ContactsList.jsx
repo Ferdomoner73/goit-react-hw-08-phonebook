@@ -1,17 +1,18 @@
 import React from 'react';
 import { nanoid } from 'nanoid';
-import { EachContact } from './EachContact';
-import { Filter } from './Filter';
+import { EachContact } from '../EachContact';
+import { Filter } from '../Filter';
 import {
   ContactsListContainer,
   ContactsListTitle,
   List,
 } from './contacts.styled';
 import { useSelector } from 'react-redux';
+import { getContacts, getFilter } from 'redux/contacts/contacts-selectors';
 
 export const ContactsList = ({ handleChange }) => {
-  const contacts = useSelector(state => state.contacts.list);
-  const filter = useSelector(state => state.filter);
+  const contacts = useSelector(getContacts);
+  const filter = useSelector(getFilter);
 
   const filterContactsList = contactsList => {
     return contactsList.filter(({ name }) =>

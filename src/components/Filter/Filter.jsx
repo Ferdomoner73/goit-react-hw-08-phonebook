@@ -2,7 +2,7 @@ import React from 'react';
 import { nanoid } from 'nanoid';
 import { Title, Input, FilterCOntainer } from './filter.styled';
 import { useDispatch } from 'react-redux';
-import { filter } from '../../../redux/filter/filter';
+import { filter } from '../../redux/filter/filter';
 
 export const Filter = () => {
   const filterUniqueId = nanoid(10);

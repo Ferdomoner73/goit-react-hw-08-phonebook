@@ -10,6 +10,7 @@ export const FilterCOntainer = styled.div`
 
 export const Title = styled.h3`
     font-weight: 300;
+    color: grey;
 `
 
 export const Input = styled.input`
