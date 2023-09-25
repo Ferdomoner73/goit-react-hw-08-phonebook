@@ -26,11 +26,9 @@ const registration = createAsyncThunk(
 );
 
 const loggining = createAsyncThunk('auth/login', async (info, thunkAPI) => {
-  console.log(info);
   try {
     const { data } = await axios.post('/users/login', info);
     token.set(data.token);
-    console.log(data);
     return data;
   } catch (e) {
     alert('Please try again with correct velues');

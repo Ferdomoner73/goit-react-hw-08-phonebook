@@ -1,4 +1,3 @@
-// import React, { lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Layout } from './Layout/Layout';
 import { Home } from '../pages/Home/Home';
@@ -16,7 +15,9 @@ export const App = () => {
           <Route index element={<Home />} />
           <Route
             path="contacts"
-            element={<PrivateRoute redirectTo="/" component={<Contacts />} />}
+            element={
+              <PrivateRoute redirectTo="/login" component={<Contacts />} />
+            }
           />
           <Route
             path="login"

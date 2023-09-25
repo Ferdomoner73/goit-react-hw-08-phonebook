@@ -1,4 +1,4 @@
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import {
   NavLinkItem,
   NavLinkList,
@@ -16,12 +16,12 @@ import operations from '../../redux/auth/auth-operations';
 export const Layout = () => {
   const isLoggedIn = useSelector(getIsLoggedIn);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const location = useLocation();
+  // const navigate = useNavigate();
+  // const location = useLocation();
 
   useEffect(() => {
     dispatch(operations.fetchCurrentUser());
-  }, [dispatch, navigate, isLoggedIn, location.pathname]);
+  }, [dispatch]);
 
   return (
     <>
